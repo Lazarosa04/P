@@ -14,6 +14,8 @@ public class b1_4 {
             while(myScanner.hasNextLine()){
                 String data = myScanner.nextLine();
             }
+
+            
             myScanner.close();
         }
         catch(FileNotFoundException e){

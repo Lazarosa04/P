@@ -9,6 +9,7 @@ public class b1_3 {
         Stack<Double> stack = new Stack<>();
         Double op1 = null;
         Double op2 = null;
+        Boolean error = false;
 
         Scanner scan = new Scanner(System.in);
         //read in the line from stdin, if it's empty, then break out OR process it
@@ -54,9 +55,11 @@ public class b1_3 {
                 
                     default:
                         System.err.println("No such operator!");
+                        error = true;
                         break;
                 }
             }
+            if (error){break;}
             System.out.println(stack.toString());
         }
         scan.close();
