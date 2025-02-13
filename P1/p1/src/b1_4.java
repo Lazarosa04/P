@@ -6,10 +6,10 @@ import java.util.List;      // list class
 import java.util.ArrayList; // array list class
 
 public class b1_4 {
-    public static void readFile(String[] args){
+    public static void main(String[] args){
         try{
             List<String> componentes = new ArrayList<>();
-            File ficheiro = new File("bloco1/numbers.txt"); // input file
+            File ficheiro = new File("P1\\p1\\lib\\numbers.txt"); // input file
             Scanner myScanner = new Scanner(ficheiro, "UTF-8"); // scan input file
             while(myScanner.hasNextLine()){
                 String data = myScanner.nextLine();
