@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Map;
 import java.util.HashMap;
 
 public class b1_2 {
