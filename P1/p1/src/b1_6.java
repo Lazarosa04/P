@@ -26,16 +26,27 @@ public class b1_6{
 
         System.out.println();//
 
-        //tradução para complicometro
-        
-        for (String s: elements){
-            if(complicometro.containsKey(s.trim())){
-                System.out.print(complicometro.get(s) + " ");
+        //tradução para complicometro      
+        boolean hasChanges;
+        do {
+            hasChanges = false;
+            StringBuilder newElements = new StringBuilder();
+            for (String s : elements) {
+                if (complicometro.containsKey(s.trim())) {
+                    newElements.append(complicometro.get(s)).append(" ");
+                    hasChanges = true;
+                } else {
+                    newElements.append(s).append(" ");
+                }
             }
-            else{
-                System.out.print(s + " ");
-            }
+            elements = newElements.toString().trim().split(" ");
+        } while (hasChanges);
+
+        for (String s : elements) {
+            System.out.print(s + " ");
         }
+        System.out.println();
+
         scan.close();
     }
 
