@@ -13,7 +13,7 @@ public class b1_6{
         complicometro = fileReader("P1\\\\p1\\\\lib\\\\dic2.txt");
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
         String text = scan.nextLine();       // input
-        String[] elements = text.split(" ");   // Considera-se “palavra” qualquer sequˆencia de caracteres delimitada por espa ̧cos.
+        String[] elements = text.split(" ");   // Considera-se “palavra” qualquer sequˆencia de caracteres delimitada por espaços.
 
         //tradução para inglês
         for(String s : elements){
