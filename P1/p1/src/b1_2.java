@@ -1,11 +1,16 @@
-import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class b1_2 {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         try (Scanner sc = new Scanner(System.in)) {
             HashMap<String, Double> hashmap = new HashMap<String, Double>();
+=======
+        Scanner sc = new Scanner(System.in);  // Create a Scanner object
+        HashMap<String, Double> hashmap = new HashMap<>();
+>>>>>>> 46b0d4162749a7541f6d47820ac23b0dc8a8a287
 
             while (sc.hasNextLine()){
                 String a = sc.nextLine();       // input
@@ -50,16 +55,19 @@ public class b1_2 {
         double  m = Double.parseDouble(op2);
         
         switch(operador) {
-            case "+":
+            case "+" -> {
                 return n + m;
-            case "-":
+            }
+            case "-" -> {
                 return n - m;
-            case "*":
+            }
+            case "*" -> {
                 return n * m;
-            case "/":
+            }
+            case "/" -> {
                 return n / m;
-            default:
-                System.err.println("Error: Operation failed");
+            }
+            default -> System.err.println("Error: Operation failed");
             }
         return 0;
     
