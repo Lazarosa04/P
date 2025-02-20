@@ -50,22 +50,18 @@ public class b1_2 {
         double  m = Double.parseDouble(op2);
         
         switch(operador) {
-            case "+" -> {
+            case "+":
                 return n + m;
-            }
-            case "-" -> {
+            case "-":
                 return n - m;
-            }
-            case "*" -> {
+            case "*":
                 return n * m;
-            }
-            case "/" -> {
+            case "/":
                 return n / m;
-            }
-            default -> System.err.println("Error: Operation failed");
-            }
-        return 0;
-    
+            default:
+                System.err.println("Error: Operation failed");
+                return 0;
+            }    
     }
       
 }
