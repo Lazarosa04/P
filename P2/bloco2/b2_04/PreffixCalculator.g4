@@ -1,10 +1,10 @@
-grammar SuffixCalculator;
+grammar PreffixCalculator;
 program:
     stat * EOF;     //zero or more repetitions of stat
 stat:
     expr ? NEWLINE;     //operative EXPR followed by a NEWLINE
 expr:
-    expr expr op = ('*' | '/' | '+' | '-')  #ExprSuffix
+    op = ('*' | '/' | '+' | '-') expr expr  #ExprPreffix
     | Number                                #ExprNumber
     ;
 Number: [0-9]+('.'[0-9]+)?;
