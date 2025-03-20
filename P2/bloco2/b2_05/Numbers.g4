@@ -1,15 +1,16 @@
 grammar Numbers;
 
-file: line+ EOF;
+program: text * EOF;
 
-line: number '-' WS word (WS word)*;
+text: line+ NEWLINE;
 
-number: DIGIT+;
+line: Integer ' - ' Word;
 
-word: LETTER+;
 
+
+Word: [a-zA-Z]+;
+Integer: [0-9]+;
+
+NEWLINE: '\r'? '\n';
 WS: [ \t]+ -> skip;
-
-DIGIT: [0-9];
-
-LETTER: [a-zA-Z];
+COMMENT: '#' .*? '\n' -> skip;

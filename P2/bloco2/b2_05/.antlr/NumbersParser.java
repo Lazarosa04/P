@@ -16,25 +16,25 @@ public class NumbersParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, WS=2, DIGIT=3, LETTER=4;
+		T__0=1, Word=2, Integer=3, NEWLINE=4, WS=5, COMMENT=6;
 	public static final int
-		RULE_file = 0, RULE_line = 1, RULE_number = 2, RULE_word = 3;
+		RULE_program = 0, RULE_text = 1, RULE_line = 2;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"file", "line", "number", "word"
+			"program", "text", "line"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'-'"
+			null, "' - '"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, "WS", "DIGIT", "LETTER"
+			null, null, "Word", "Integer", "NEWLINE", "WS", "COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -89,42 +89,42 @@ public class NumbersParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class FileContext extends ParserRuleContext {
+	public static class ProgramContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(NumbersParser.EOF, 0); }
-		public List<LineContext> line() {
-			return getRuleContexts(LineContext.class);
+		public List<TextContext> text() {
+			return getRuleContexts(TextContext.class);
 		}
-		public LineContext line(int i) {
-			return getRuleContext(LineContext.class,i);
+		public TextContext text(int i) {
+			return getRuleContext(TextContext.class,i);
 		}
-		public FileContext(ParserRuleContext parent, int invokingState) {
+		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_file; }
+		@Override public int getRuleIndex() { return RULE_program; }
 	}
 
-	public final FileContext file() throws RecognitionException {
-		FileContext _localctx = new FileContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_file);
+	public final ProgramContext program() throws RecognitionException {
+		ProgramContext _localctx = new ProgramContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_program);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(9); 
+			setState(9);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while (_la==Integer) {
 				{
 				{
-				setState(8);
-				line();
+				setState(6);
+				text();
 				}
 				}
-				setState(11); 
+				setState(11);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==DIGIT );
-			setState(13);
+			}
+			setState(12);
 			match(EOF);
 			}
 		}
@@ -140,20 +140,60 @@ public class NumbersParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
+	public static class TextContext extends ParserRuleContext {
+		public TerminalNode NEWLINE() { return getToken(NumbersParser.NEWLINE, 0); }
+		public List<LineContext> line() {
+			return getRuleContexts(LineContext.class);
+		}
+		public LineContext line(int i) {
+			return getRuleContext(LineContext.class,i);
+		}
+		public TextContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_text; }
+	}
+
+	public final TextContext text() throws RecognitionException {
+		TextContext _localctx = new TextContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_text);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(15); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(14);
+				line();
+				}
+				}
+				setState(17); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==Integer );
+			setState(19);
+			match(NEWLINE);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
 	public static class LineContext extends ParserRuleContext {
-		public NumberContext number() {
-			return getRuleContext(NumberContext.class,0);
-		}
-		public List<TerminalNode> WS() { return getTokens(NumbersParser.WS); }
-		public TerminalNode WS(int i) {
-			return getToken(NumbersParser.WS, i);
-		}
-		public List<WordContext> word() {
-			return getRuleContexts(WordContext.class);
-		}
-		public WordContext word(int i) {
-			return getRuleContext(WordContext.class,i);
-		}
+		public TerminalNode Integer() { return getToken(NumbersParser.Integer, 0); }
+		public TerminalNode Word() { return getToken(NumbersParser.Word, 0); }
 		public LineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -162,127 +202,16 @@ public class NumbersParser extends Parser {
 
 	public final LineContext line() throws RecognitionException {
 		LineContext _localctx = new LineContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_line);
-		int _la;
+		enterRule(_localctx, 4, RULE_line);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(15);
-			number();
-			setState(16);
+			setState(21);
+			match(Integer);
+			setState(22);
 			match(T__0);
-			setState(17);
-			match(WS);
-			setState(18);
-			word();
 			setState(23);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==WS) {
-				{
-				{
-				setState(19);
-				match(WS);
-				setState(20);
-				word();
-				}
-				}
-				setState(25);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class NumberContext extends ParserRuleContext {
-		public List<TerminalNode> DIGIT() { return getTokens(NumbersParser.DIGIT); }
-		public TerminalNode DIGIT(int i) {
-			return getToken(NumbersParser.DIGIT, i);
-		}
-		public NumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_number; }
-	}
-
-	public final NumberContext number() throws RecognitionException {
-		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_number);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(27); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(26);
-				match(DIGIT);
-				}
-				}
-				setState(29); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( _la==DIGIT );
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class WordContext extends ParserRuleContext {
-		public List<TerminalNode> LETTER() { return getTokens(NumbersParser.LETTER); }
-		public TerminalNode LETTER(int i) {
-			return getToken(NumbersParser.LETTER, i);
-		}
-		public WordContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_word; }
-	}
-
-	public final WordContext word() throws RecognitionException {
-		WordContext _localctx = new WordContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_word);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(32); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(31);
-				match(LETTER);
-				}
-				}
-				setState(34); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( _la==LETTER );
+			match(Word);
 			}
 		}
 		catch (RecognitionException re) {
@@ -297,31 +226,23 @@ public class NumbersParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0004%\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0004\u0000\n\b"+
-		"\u0000\u000b\u0000\f\u0000\u000b\u0001\u0000\u0001\u0000\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0005\u0001\u0016"+
-		"\b\u0001\n\u0001\f\u0001\u0019\t\u0001\u0001\u0002\u0004\u0002\u001c\b"+
-		"\u0002\u000b\u0002\f\u0002\u001d\u0001\u0003\u0004\u0003!\b\u0003\u000b"+
-		"\u0003\f\u0003\"\u0001\u0003\u0000\u0000\u0004\u0000\u0002\u0004\u0006"+
-		"\u0000\u0000$\u0000\t\u0001\u0000\u0000\u0000\u0002\u000f\u0001\u0000"+
-		"\u0000\u0000\u0004\u001b\u0001\u0000\u0000\u0000\u0006 \u0001\u0000\u0000"+
-		"\u0000\b\n\u0003\u0002\u0001\u0000\t\b\u0001\u0000\u0000\u0000\n\u000b"+
-		"\u0001\u0000\u0000\u0000\u000b\t\u0001\u0000\u0000\u0000\u000b\f\u0001"+
-		"\u0000\u0000\u0000\f\r\u0001\u0000\u0000\u0000\r\u000e\u0005\u0000\u0000"+
-		"\u0001\u000e\u0001\u0001\u0000\u0000\u0000\u000f\u0010\u0003\u0004\u0002"+
-		"\u0000\u0010\u0011\u0005\u0001\u0000\u0000\u0011\u0012\u0005\u0002\u0000"+
-		"\u0000\u0012\u0017\u0003\u0006\u0003\u0000\u0013\u0014\u0005\u0002\u0000"+
-		"\u0000\u0014\u0016\u0003\u0006\u0003\u0000\u0015\u0013\u0001\u0000\u0000"+
-		"\u0000\u0016\u0019\u0001\u0000\u0000\u0000\u0017\u0015\u0001\u0000\u0000"+
-		"\u0000\u0017\u0018\u0001\u0000\u0000\u0000\u0018\u0003\u0001\u0000\u0000"+
-		"\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u001a\u001c\u0005\u0003\u0000"+
-		"\u0000\u001b\u001a\u0001\u0000\u0000\u0000\u001c\u001d\u0001\u0000\u0000"+
-		"\u0000\u001d\u001b\u0001\u0000\u0000\u0000\u001d\u001e\u0001\u0000\u0000"+
-		"\u0000\u001e\u0005\u0001\u0000\u0000\u0000\u001f!\u0005\u0004\u0000\u0000"+
-		" \u001f\u0001\u0000\u0000\u0000!\"\u0001\u0000\u0000\u0000\" \u0001\u0000"+
-		"\u0000\u0000\"#\u0001\u0000\u0000\u0000#\u0007\u0001\u0000\u0000\u0000"+
-		"\u0004\u000b\u0017\u001d\"";
+		"\u0004\u0001\u0006\u001a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0002\u0002\u0007\u0002\u0001\u0000\u0005\u0000\b\b\u0000\n\u0000\f\u0000"+
+		"\u000b\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0004\u0001\u0010\b"+
+		"\u0001\u000b\u0001\f\u0001\u0011\u0001\u0001\u0001\u0001\u0001\u0002\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0000\u0000\u0003\u0000\u0002"+
+		"\u0004\u0000\u0000\u0018\u0000\t\u0001\u0000\u0000\u0000\u0002\u000f\u0001"+
+		"\u0000\u0000\u0000\u0004\u0015\u0001\u0000\u0000\u0000\u0006\b\u0003\u0002"+
+		"\u0001\u0000\u0007\u0006\u0001\u0000\u0000\u0000\b\u000b\u0001\u0000\u0000"+
+		"\u0000\t\u0007\u0001\u0000\u0000\u0000\t\n\u0001\u0000\u0000\u0000\n\f"+
+		"\u0001\u0000\u0000\u0000\u000b\t\u0001\u0000\u0000\u0000\f\r\u0005\u0000"+
+		"\u0000\u0001\r\u0001\u0001\u0000\u0000\u0000\u000e\u0010\u0003\u0004\u0002"+
+		"\u0000\u000f\u000e\u0001\u0000\u0000\u0000\u0010\u0011\u0001\u0000\u0000"+
+		"\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011\u0012\u0001\u0000\u0000"+
+		"\u0000\u0012\u0013\u0001\u0000\u0000\u0000\u0013\u0014\u0005\u0004\u0000"+
+		"\u0000\u0014\u0003\u0001\u0000\u0000\u0000\u0015\u0016\u0005\u0003\u0000"+
+		"\u0000\u0016\u0017\u0005\u0001\u0000\u0000\u0017\u0018\u0005\u0002\u0000"+
+		"\u0000\u0018\u0005\u0001\u0000\u0000\u0000\u0002\t\u0011";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
