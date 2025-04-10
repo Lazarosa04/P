@@ -1,0 +1,19 @@
+table(row) :: = <<
+\<table\>
+    <row;separate="\n">
+\</table\>
+>>
+
+tr(row) :: = <<
+\<tr\>
+    <row;separate="\n">
+\</tr\>
+>>
+
+
+tr(row) :: = <<
+\<tr\>
+    <row;separate="\n">
+\</tr\>
+>>
+
